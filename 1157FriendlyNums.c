@@ -40,18 +40,17 @@ int accum(int* ptr,int end,int begin){
 valarray factors(int number){
     int max_fact,*factors,actual,factor;
     actual = 0;
-    factor = 0;
-    max_fact=log2(number);
+    factor = 2;
+    max_fact=500;
     factors=(int*)calloc(max_fact,sizeof(int));
     while(number!=1){
         if(number%factor==0){
             factors[actual]=factor;
             actual++;
-            number/=factor;
             }
-        else factor++;
+        factor++;
         }
-    factors=(int*)realloc(factors,actual*sizeof(int));
+    factors=(int*)realloc(factors,(actual+1)*sizeof(int));
     valarray array;
     array.inptr = factors;
     array.datanum = actual+1;
@@ -65,6 +64,7 @@ bool is_friend(data dat){
     two = factors(dat.num2);
     accum1=accum(one.inptr,one.datanum,0);
     accum2=accum(two.inptr,two.datanum,0);
+    
     return accum1 == dat.num2 && accum2 == dat.num1;
 }
 
