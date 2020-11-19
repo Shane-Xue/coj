@@ -1,7 +1,10 @@
 /* https://www.dotcpp.com/oj/problem1157.html */
 
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 typedef struct dataset{
     int num1,num2;
@@ -23,7 +26,7 @@ data make_data(int a,int b){
     return datum;
 }
 
-int accum(int* ptr,int end,int begin=0){
+int accum(int* ptr,int end,int begin){
     /* accummulate all integers in the array ptr in range [begin,end) */
     /* It is the client's responsibility to make sure the data does not go out of range. */
     int sum;
@@ -48,7 +51,7 @@ valarray factors(int number){
             }
         else factor++;
         }
-    realloc(factors,actual*sizeof(int));
+    factors=(int*)realloc(factors,actual*sizeof(int));
     valarray array;
     array.inptr = factors;
     array.datanum = actual+1;
@@ -60,22 +63,19 @@ bool is_friend(data dat){
     int accum1,accum2;
     one = factors(dat.num1);
     two = factors(dat.num2);
-    accum1=accum(one.inptr,one.datanum);
-    accum2=accum(two.inptr,two.datanum);
+    accum1=accum(one.inptr,one.datanum,0);
+    accum2=accum(two.inptr,two.datanum,0);
     return accum1 == dat.num2 && accum2 == dat.num1;
 }
 
 int main(){
     int input,number;
-    //data *indat;
     scanf("%d",&input);
-    //indat = calloc(input,sizeof(data));
     for(number=0;number<input;number++){
         int one,two;
         scanf("%d %d",&one,&two);
-        //indat[num]=make_data(one,two);
         if(is_friend(make_data(one,two))){
-            puts("YES")
+            puts("YES");
         }
         else puts("NO");
     }
