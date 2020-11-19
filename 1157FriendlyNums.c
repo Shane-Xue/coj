@@ -40,7 +40,7 @@ int accum(int* ptr,int end,int begin){
 valarray factors(int number){
     int max_fact,*factors,actual,factor;
     actual = 0;
-    factor = 2;
+    factor = 1;
     max_fact=500;
     factors=(int*)calloc(max_fact,sizeof(int));
     while(number!=1){
