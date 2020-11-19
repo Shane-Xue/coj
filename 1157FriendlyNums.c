@@ -43,7 +43,7 @@ valarray factors(int number){
     factor = 1;
     max_fact=500;
     factors=(int*)calloc(max_fact,sizeof(int));
-    while(number!=1){
+    while(number!=factor){
         if(number%factor==0){
             factors[actual]=factor;
             actual++;
