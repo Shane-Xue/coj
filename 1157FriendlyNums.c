@@ -20,6 +20,11 @@ void data_init(data* dat,int init1,int init2){
     dat->num2 = init2;
 }
 
+void free_array(valarray* a){
+    free(a->intptr);
+    a->datanum=-1;
+}
+
 data make_data(int a,int b){
     data datum;
     data_init(&datum,a,b);
@@ -64,8 +69,10 @@ bool is_friend(data dat){
     two = factors(dat.num2);
     accum1=accum(one.inptr,one.datanum,0);
     accum2=accum(two.inptr,two.datanum,0);
-    
-    return accum1 == dat.num2 && accum2 == dat.num1;
+    bool result = accum1 == dat.num2 && accum2 == dat.num1;
+    free_array(one);
+    free_array(two);
+    return result;
 }
 
 int main(){
