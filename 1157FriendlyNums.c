@@ -21,7 +21,7 @@ void data_init(data* dat,int init1,int init2){
 }
 
 void free_array(valarray* a){
-    free(a->intptr);
+    free(a->inptr);
     a->datanum=-1;
 }
 
@@ -70,8 +70,8 @@ bool is_friend(data dat){
     accum1=accum(one.inptr,one.datanum,0);
     accum2=accum(two.inptr,two.datanum,0);
     bool result = accum1 == dat.num2 && accum2 == dat.num1;
-    free_array(one);
-    free_array(two);
+    free_array(&one);
+    free_array(&two);
     return result;
 }
 
